@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.com.model.Configuracao;
 import br.com.model.Dominio;
 import br.com.model.Usuario;
 import br.com.model.UsuarioDTO;
@@ -24,24 +25,42 @@ public class Exemple {
 //        dominio.setId(2);
 //        dominio.setNome("Dados de banco");
 
-        Usuario usuario = new Usuario();
-        usuario.setId(3);
-        usuario.setLogin("teste@email.com");
-        usuario.setSenha("565");
-        usuario.setUltimoAcesso(LocalDateTime.now());
-        usuario.setDominio(entityManager.find(Dominio.class, 2));
-        
+//        Usuario usuario = new Usuario();
+//        usuario.setId(3);
+//        usuario.setLogin("teste@email.com");
+//        usuario.setSenha("565");
+//        usuario.setUltimoAcesso(LocalDateTime.now());
+//        usuario.setDominio(entityManager.find(Dominio.class, 2));
+//      
+		Configuracao configuracao = new Configuracao();
+		configuracao.setId(1);
+		configuracao.setEncerrarSessaoAutomaticamente(true);
+		configuracao.setReceberNotificacoes(true);
+		configuracao.setUsuario(entityManager.find(Usuario.class, 1));
+		
         entityManager.getTransaction().begin();
-        entityManager.persist(usuario);
+        entityManager.persist(configuracao);
         entityManager.getTransaction().commit();
 
 //		primeiraConsulta(entityManager);
 //		escolhendoRetorno(entityManager);
 //		somenteLogins(entityManager);
 //		fazendoProjecoes(entityManager);
+//        passandoParametros(entityManager);
 
 		entityManager.close();
 		entityManagerFactory.close();
+	}
+
+	private static void passandoParametros(EntityManager entityManager) {
+		Usuario usuario = entityManager.createQuery("select u from Usuario u where u.id= :pId", Usuario.class).setParameter("pId", 1).getSingleResult();
+//		Hibernate: select usuario0_.id as id1_2_, usuario0_.dominio_id as dominio_6_2_, usuario0_.login as login2_2_, usuario0_.nome as nome3_2_, usuario0_.senha as senha4_2_, usuario0_.ultimoAcesso as ultimoAc5_2_ from TB_USUARIO usuario0_ where usuario0_.id=?
+//		Hibernate: select dominio0_.id as id1_1_0_, dominio0_.nome as nome2_1_0_ from TB_DOMINIO dominio0_ where dominio0_.id=?
+		System.out.println(usuario);
+		
+		String login = entityManager.createQuery("select u.nome from Usuario u where u.id= :pId", String.class).setParameter("pId", 3).getSingleResult();
+//		Hibernate: select usuario0_.nome as col_0_0_ from TB_USUARIO usuario0_ where usuario0_.id=?
+		System.out.println(login);
 	}
 
 	private static void fazendoProjecoes(EntityManager entityManager) {

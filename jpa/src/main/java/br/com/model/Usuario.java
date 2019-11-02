@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +26,9 @@ public class Usuario {
 
     @ManyToOne
     private Dominio dominio;
+    
+    @OneToOne(mappedBy = "usuario")
+    private Configuracao configuracao;
 
     public Integer getId() { 
         return id;
@@ -88,4 +92,19 @@ public class Usuario {
 	public void setUltimoAcesso(LocalDateTime ultimoAcesso) {
 		this.ultimoAcesso = ultimoAcesso;
 	}
+
+	@Override
+	public String toString() {
+		return "Login=" + login + ", senha=" + senha + ", nome=" + nome + ", ultimoAcesso=" + ultimoAcesso;
+	}
+
+	public Configuracao getConfiguracao() {
+		return configuracao;
+	}
+
+	public void setConfiguracao(Configuracao configuracao) {
+		this.configuracao = configuracao;
+	}
+	
+	
 }

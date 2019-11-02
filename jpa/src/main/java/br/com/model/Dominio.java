@@ -60,4 +60,10 @@ public class Dominio {
 		return id.hashCode();
 	}
 
+	@Override
+	public String toString() {
+		return "Dominio [id=" + id + ", nome=" + nome + ", usuarios=" + usuarios + "]";
+	}
+
+	
 }
