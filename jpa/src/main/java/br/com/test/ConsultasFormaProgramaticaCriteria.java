@@ -30,7 +30,6 @@ public class ConsultasFormaProgramaticaCriteria {
 //		ordersResults(entityManager);
 		paginator(entityManager);
 		
-		
 		entityManager.close();
 		entityManagerFactory.close();
 		
