@@ -25,6 +25,7 @@ public class MyOpcional {
 		List<String> list= new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
 		List<String> collect = list.stream().filter(s -> Integer.valueOf(s) % 2 == 0).collect(Collectors.toList());
 		collect.forEach(System.out::println);
+		
 
 	}
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<diskStore path="java.io.tmpdir" />
+
+	<defaultCache maxElementsInMemory="20" eternal="true"
+		overflowToDisk="false" />
+
+<!-- especifico p cada entidade --> 
+<!-- 	<cache name="br.com.caelum.model.Produto" -->
+<!-- 		maxElementsInMemory="300" eternal="true" overflowToDisk="false" /> -->
+
+</ehcache>
+<!-- Config p armazenar apenas objetos --> 
